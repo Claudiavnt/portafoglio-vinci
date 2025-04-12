@@ -1,7 +1,6 @@
 const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
-  debugger;
   // Legge il parametro 'isin' dalla query string (es. ?isin=IE00BF1B7389)
   const { isin } = event.queryStringParameters || {};
   if (!isin) {
