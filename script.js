@@ -31,7 +31,7 @@ async function fetchPortfolioValue(isin) {
 async function fetchAllPortfolioValues() {
   const promises = ISIN.map(isin => fetchPortfolioValue(isin));
   const portfolioValues = await Promise.all(promises);
-  const totalPortfolioValue = portfolioValues.reduce((acc, value) => acc + value, 0);
+  const totalPortfolioValue = portfolioValues.reduce((acc, value) => acc + value + 577.16, 0);
   console.log('Total Portfolio Value:', totalPortfolioValue);
 
   document.getElementById('portfolioValueDisplay').innerText = `+ ${totalPortfolioValue.toFixed(2)} €`;
