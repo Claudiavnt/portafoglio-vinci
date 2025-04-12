@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="align">
+  <div class="grid align__item">
+    <div class="register">
+      <img  class="site__logo" src="svg/login.svg" alt=""/>
+      <h2>Ciao!</h2>
+      <p>Inserisci il codice segreto per vedere i tuoi risparmi</p>
+      <form id="passwordForm">
+        <div class="form__field">
+          <input type="password" maxlength="1" id="input1" oninput="moveToNext(1)" onkeypress="return isNumberKey(event)" placeholder="___">
+          <input type="password" maxlength="1" id="input2" oninput="moveToNext(2)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+          <input type="password" maxlength="1" id="input3" oninput="moveToNext(3)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+          <input type="password" maxlength="1" id="input4" oninput="moveToNext(4)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+        </div>
+        <div class="form__field">
+          <input type="button" onclick="checkPassword()" value="ENTRA">
+        </div>
+      </form>
+      <!-- Modale personalizzata -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+            <button class="close-btn" onclick="closeModal()">Chiudi</button>
+        </div>
+    </div>
+
+      <script>
+        const correctPassword = "0312";
+        function moveToNext(currentInput) {
+            const nextInput = currentInput + 1;
+            const current = document.getElementById('input' + currentInput);
+            if (current.value.length === 1 && nextInput <= 4) {
+                document.getElementById('input' + nextInput).disabled = false;
+                document.getElementById('input' + nextInput).focus();
+            }
+        }
+
+        // Funzione per consentire solo numeri
+        function isNumberKey(evt) {
+          const charCode = evt.which ? evt.which : evt.keyCode;
+          // Consente solo numeri (codici ASCII 48-57)
+          if (charCode < 48 || charCode > 57) {
+              evt.preventDefault();
+              return false;
+          }
+          return true;
+        }
+
+        // Funzione per controllare se la password è corretta
+        function checkPassword() {
+          const input1 = document.getElementById('input1').value;
+          const input2 = document.getElementById('input2').value;
+          const input3 = document.getElementById('input3').value;
+          const input4 = document.getElementById('input4').value;
+
+          const enteredPassword = input1 + input2 + input3 + input4;
+
+          const messageElement = document.getElementById('message');
+
+          if (enteredPassword === correctPassword) {
+            window.location.href = "investimento.html";
+          } else {
+            showModal("Password errata. Riprova!");
+            // Reset dei campi input
+            resetInputs();
+          }
+        }
+
+        // Funzione per resettare i campi di input e disabilitare gli input tranne il primo
+        function resetInputs() {
+          document.getElementById('input1').value = '';
+          document.getElementById('input2').value = '';
+          document.getElementById('input3').value = '';
+          document.getElementById('input4').value = '';
+
+          document.getElementById('input2').disabled = true;
+          document.getElementById('input3').disabled = true;
+          document.getElementById('input4').disabled = true;
+        }
+
+                // Funzione per mostrare la modale con un messaggio
+        function showModal(message) {
+          document.getElementById('modalMessage').textContent = message;
+          document.getElementById('myModal').style.display = 'flex';
+        }
+
+        // Funzione per chiudere la modale
+        function closeModal() {
+          document.getElementById('myModal').style.display = 'none';
+        }
+      </script>
+
+    </div>
+  </div>
+</body>
+</html>

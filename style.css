@@ -1,0 +1,251 @@
+@font-face {
+  font-family: 'metaBold';
+  src: url(style/font/MetaPlusBold.ttf) format("ttf");
+}
+
+@font-face {
+  font-family: 'acme';
+  src: url(style/font/Acme-Regular.ttf) format("ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #f3f3f3;
+  color: #5f5f5f;
+  font: 300 1rem/1.5 Helvetica Neue, sans-serif;
+  margin: 0;
+  min-height: 100%;
+}
+
+.align {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.align__item--start {
+  align-self: flex-start;
+}
+.align__item--end {
+  align-self: flex-end;
+}
+
+.site__logo {
+  margin-bottom: 2rem;
+}
+
+input {
+  border: 0;
+  font: inherit;
+}
+input::placeholder {
+  color: #7e8ba3;
+}
+
+.form__field {
+  margin-bottom: 1rem;
+}
+.form input {
+  outline: 0;
+  padding: 0.5rem 1rem;
+}
+.form input[type=email], .form input[type=password] {
+  width: 100%;
+}
+
+.grid {
+  margin: 0 auto;
+  max-width: 25rem;
+  width: 100%;
+}
+
+h2 {
+  font-size: 4rem;
+  line-height: 3.5rem;
+  font-weight: 100;
+  margin: 0 0 1rem;
+  color: #194FB3;
+  font-family: 'acme';
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 100;
+  margin: 0 0 1rem;
+  color: white;
+  font-family: 'acme';
+}
+
+a {
+  color: #7e8ba3;
+}
+
+.register {
+  background-color: white;
+  box-shadow: 0 0 250px #aaaaaa;
+  text-align: center;
+  padding: 1rem 2rem;
+}
+.register input {
+  border: 1px solid #D87C0E;
+  border-radius: 15px;
+  background-color: transparent;
+  text-align: center;
+  width: 4rem;
+  height: 4rem;
+  color: #D87C0E;
+  font-family: 'acme';
+  font-size: 2rem;
+}
+/* Stile del placeholder personalizzato */
+input::placeholder {
+  color: #D87C0E;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+/* Compatibilità per browser specifici */
+input::-webkit-input-placeholder { /* Chrome, Safari, Opera */
+  color: #D87C0E;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #D87C0E;
+}
+input::-ms-input-placeholder { /* Microsoft Edge */
+  color: #D87C0E;
+}
+.register input:active,
+.register input:focus {
+  border: 1px solid #D87C0E;
+}
+.register input[type=button] {
+  border: 1px solid #194FB3;
+  background-color: #194FB3;
+  color: #fff;
+  width: 100%;
+  border-radius: 9999999px;
+  font-size: 1rem;
+  height: 3rem;
+}
+
+/* Stile per la modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+.modal-content p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.close-btn {
+  border: 1px solid #194FB3;
+  background-color: #194FB3;
+  color: #fff;
+  width: 100%;
+  border-radius: 9999999px;
+  font-size: 1rem;
+  height: 3rem;
+}
+
+.header_wrapper{
+  background-color: #194FB3;
+  width: 100%;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.gift_wrapper{
+  background-color: #D87C0E;
+  position: relative;
+  top: -3rem;
+  padding: 2rem;
+  text-align: left;
+}
+
+.gift {
+  height: 15rem;
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: white;
+  background-image: url("svg/gift_back.svg"); /* Percorso del tuo SVG */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.gift_detail{
+  text-align: left;
+  font-family: 'acme';
+  line-height: 1.5rem;
+  position: relative;
+}
+
+.investimento_img{
+  width: 60%;
+  z-index: 9999999999;
+  position: relative;
+}
+
+.investimento_title{
+  text-align: left;
+  width: 35%;
+  margin-left: 1rem;
+  float: left;
+  margin-top: 2rem;
+}
+
+.investimento_description{
+  margin: 0 0.5rem;
+  font-size: 1rem;
+}
+
+.detail_wrapper{
+  text-align: left;
+  font-family: 'acme';
+  line-height: 1rem;
+  padding: 1rem;
+  position: relative;
+  top: -2rem;
+}
+
+.guadagno_label{
+  background-color: green;
+  color: white;
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: 1000px;
+  text-align: center;
+}
+
+
+.quote-container {
+  position: relative;
+  max-width: 600px;
+  padding: 0 3rem;
+  top: -2rem;
+}
