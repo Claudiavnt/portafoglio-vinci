@@ -12,8 +12,8 @@ async function fetchPortfolioValue(isin) {
   try {
     const response = await fetch(BASE_URL);
     const data = await response.json();
-    if (data['latestQuote'] && data['latestQuote']['localized']) {
-      const closingPrice = parseFloat(data['latestQuote']['localized']);
+    if (data['latestQuote'] && data['latestQuote']['raw']) {
+      const closingPrice = parseFloat(data['latestQuote']['raw']);
       const portfolioValue = closingPrice * NUMBER_OF_TITLES[isin];
       console.log(`Ticker ${isin} - Closing Price: ${closingPrice}, Portfolio Value: ${portfolioValue}`);
       return portfolioValue;
@@ -31,7 +31,12 @@ async function fetchPortfolioValue(isin) {
 async function fetchAllPortfolioValues() {
   const promises = ISIN.map(isin => fetchPortfolioValue(isin));
   const portfolioValues = await Promise.all(promises);
-  const totalPortfolioValue = portfolioValues.reduce((acc, value) => acc + value + 577.16, 0);
+  let portfolioValue = 0;
+  const liquidita = 577.16;
+  portfolioValues.forEach(value => {
+    portfolioValue = portfolioValue + value;
+  })
+  const totalPortfolioValue = portfolioValue + liquidita
   console.log('Total Portfolio Value:', totalPortfolioValue);
 
   document.getElementById('portfolioValueDisplay').innerText = `+ ${totalPortfolioValue.toFixed(2)} €`;

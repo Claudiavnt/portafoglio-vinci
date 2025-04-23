@@ -32,71 +32,91 @@
         </div>
     </div>
 
-      <script>
-        const correctPassword = "0312";
-        function moveToNext(currentInput) {
-            const nextInput = currentInput + 1;
-            const current = document.getElementById('input' + currentInput);
-            if (current.value.length === 1 && nextInput <= 4) {
-                document.getElementById('input' + nextInput).disabled = false;
-                document.getElementById('input' + nextInput).focus();
+    <script>
+      const correctPassword = "0312";
+
+      // Abilita solo cifre
+      function isNumberKey(evt) {
+        const c = evt.which || evt.keyCode;
+        if (c < 48 || c > 57) {
+          evt.preventDefault();
+          return false;
+        }
+        return true;
+      }
+
+      // Sposta avanti automatico
+      function moveToNext(idx) {
+        const curr = document.getElementById('input'+idx);
+        if (curr.value.length === 1 && idx < 4) {
+          const next = document.getElementById('input'+(idx+1));
+          next.disabled = false;
+          next.focus();
+        }
+      }
+
+      // Gestione backspace “sequenziale”
+      function handleBackspace(evt, idx) {
+        if (evt.key === 'Backspace') {
+          const curr = document.getElementById('input'+idx);
+          // Se è già vuoto, torno indietro
+          if (curr.value === '') {
+            if (idx > 1) {
+              curr.disabled = true;            // disabilito il corrente
+              const prev = document.getElementById('input'+(idx-1));
+              prev.value = '';                  // svuoto il precedente
+              prev.disabled = false;            // riabilito il precedente
+              prev.focus();                     // ci vado col focus
             }
-        }
-
-        // Funzione per consentire solo numeri
-        function isNumberKey(evt) {
-          const charCode = evt.which ? evt.which : evt.keyCode;
-          // Consente solo numeri (codici ASCII 48-57)
-          if (charCode < 48 || charCode > 57) {
-              evt.preventDefault();
-              return false;
-          }
-          return true;
-        }
-
-        // Funzione per controllare se la password è corretta
-        function checkPassword() {
-          const input1 = document.getElementById('input1').value;
-          const input2 = document.getElementById('input2').value;
-          const input3 = document.getElementById('input3').value;
-          const input4 = document.getElementById('input4').value;
-
-          const enteredPassword = input1 + input2 + input3 + input4;
-
-          const messageElement = document.getElementById('message');
-
-          if (enteredPassword === correctPassword) {
-            window.location.href = "investimento.html";
           } else {
-            showModal("Password errata. Riprova!");
-            // Reset dei campi input
-            resetInputs();
+            // se non è vuoto, prima cancello il carattere
+            curr.value = '';
           }
+          evt.preventDefault();
         }
+      }
 
-        // Funzione per resettare i campi di input e disabilitare gli input tranne il primo
-        function resetInputs() {
-          document.getElementById('input1').value = '';
-          document.getElementById('input2').value = '';
-          document.getElementById('input3').value = '';
-          document.getElementById('input4').value = '';
-
-          document.getElementById('input2').disabled = true;
-          document.getElementById('input3').disabled = true;
-          document.getElementById('input4').disabled = true;
+      // Controlla la password e gestisce la modale
+      function checkPassword() {
+        const p = Array.from({length:4},(_,i)=>
+          document.getElementById('input'+(i+1)).value
+        ).join('');
+        if (p === correctPassword) {
+          window.location.href = "investimento.html";
+        } else {
+          showModal("Password errata. Riprova!");
+          resetInputs();
         }
+      }
 
-                // Funzione per mostrare la modale con un messaggio
-        function showModal(message) {
-          document.getElementById('modalMessage').textContent = message;
-          document.getElementById('myModal').style.display = 'flex';
+      function resetInputs() {
+        for (let i = 1; i <= 4; i++) {
+          const el = document.getElementById('input'+i);
+          el.value = '';
+          el.disabled = (i !== 1);
         }
+        document.getElementById('input1').focus();
+      }
 
-        // Funzione per chiudere la modale
-        function closeModal() {
-          document.getElementById('myModal').style.display = 'none';
+      function showModal(msg) {
+        document.getElementById('modalMessage').textContent = msg;
+        document.getElementById('myModal').style.display = 'flex';
+      }
+      function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+      }
+
+      // Al caricamento, attacco gli handler dinamicamente
+      window.addEventListener('DOMContentLoaded', () => {
+        resetInputs();
+        for (let i = 1; i <= 4; i++) {
+          const el = document.getElementById('input'+i);
+          el.addEventListener('keypress', isNumberKey);
+          el.addEventListener('input', () => moveToNext(i));
+          el.addEventListener('keydown', (e) => handleBackspace(e, i));
         }
-      </script>
+      });
+    </script>
 
     </div>
   </div>

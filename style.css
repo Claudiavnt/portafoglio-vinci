@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'metaBold';
-  src: url(style/font/MetaPlusBold.ttf) format("ttf");
+  src: url(style/font/MetaPlusBold.ttf) format("truetype");
 }
 
 @font-face {
   font-family: 'acme';
-  src: url(style/font/Acme-Regular.ttf) format("ttf");
+  src: url(style/font/Acme-Regular.ttf) format("truetype");
 }
 
 * {
@@ -65,17 +65,26 @@ input::placeholder {
   width: 100%;
 }
 
-h2 {
-  font-size: 4rem;
+h1 {
+  font-size: 5rem;
   line-height: 3.5rem;
   font-weight: 100;
-  margin: 0 0 1rem;
-  color: #194FB3;
+  margin: 0;
+  color: white;
+  font-family: 'acme';
+}
+
+h2 {
+  font-size: 3.5rem;
+  line-height: 3.5rem;
+  font-weight: 100;
+  margin: 0;
+  color: white;
   font-family: 'acme';
 }
 
 h3 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 100;
   margin: 0 0 1rem;
   color: white;
@@ -93,40 +102,40 @@ a {
   padding: 1rem 2rem;
 }
 .register input {
-  border: 1px solid #D87C0E;
+  border: 1px solid #142035;
   border-radius: 15px;
   background-color: transparent;
   text-align: center;
   width: 4rem;
   height: 4rem;
-  color: #D87C0E;
+  color: #142035;
   font-family: 'acme';
   font-size: 2rem;
 }
 /* Stile del placeholder personalizzato */
 input::placeholder {
-  color: #D87C0E;
+  color: #142035;
   font-size: 1rem;
   opacity: 0.7;
 }
 
 /* Compatibilità per browser specifici */
 input::-webkit-input-placeholder { /* Chrome, Safari, Opera */
-  color: #D87C0E;
+  color: #142035;
 }
 input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #D87C0E;
+  color: #142035;
 }
 input::-ms-input-placeholder { /* Microsoft Edge */
-  color: #D87C0E;
+  color: #142035;
 }
 .register input:active,
 .register input:focus {
-  border: 1px solid #D87C0E;
+  border: 1px solid #142035;
 }
 .register input[type=button] {
-  border: 1px solid #194FB3;
-  background-color: #194FB3;
+  border: 1px solid #142035;
+  background-color: #142035;
   color: #fff;
   width: 100%;
   border-radius: 9999999px;
@@ -163,8 +172,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .close-btn {
-  border: 1px solid #194FB3;
-  background-color: #194FB3;
+  border: 1px solid #142035;
+  background-color: #142035;
   color: #fff;
   width: 100%;
   border-radius: 9999999px;
@@ -173,18 +182,17 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .header_wrapper{
-  background-color: #194FB3;
+  background-color: #142035;
   width: 100%;
   height: 2rem;
-  margin-bottom: 1rem;
 }
 
 .gift_wrapper{
-  background-color: #D87C0E;
+  background-color: #142035;
   position: relative;
   top: -3rem;
   padding: 2rem;
-  text-align: left;
+  text-align: center;
 }
 
 .gift {
@@ -205,24 +213,31 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   position: relative;
 }
 
-.investimento_img{
-  width: 60%;
-  z-index: 9999999999;
-  position: relative;
+.investimento_wrapper{
+  height: 10rem;
+  background-color:#142035;
+  padding: 0 1rem;
 }
 
 .investimento_title{
   text-align: left;
-  width: 35%;
+  width: 50%;
   margin-left: 1rem;
   float: left;
   margin-top: 2rem;
 }
 
-.investimento_description{
-  margin: 0 0.5rem;
-  font-size: 1rem;
+.investimento_title h3{
+  color: white;
+  margin-bottom: 0.5rem;
 }
+
+.investimento_description{
+  font-size: 1rem;
+  color: white;
+  margin: 0;
+}
+
 
 .detail_wrapper{
   text-align: left;
@@ -231,15 +246,6 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   padding: 1rem;
   position: relative;
   top: -2rem;
-}
-
-.guadagno_label{
-  background-color: green;
-  color: white;
-  padding: 1rem;
-  font-size: 2rem;
-  border-radius: 1000px;
-  text-align: center;
 }
 
 
