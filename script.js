@@ -47,9 +47,15 @@ fetchAllPortfolioValues();
 function openInvestimentMemoModal() {
   var modal = document.getElementById("investmentMemoModal");
   modal.style.display = 'block';
+  var button = document.getElementById("myBtn");
+  button.classList.add("fa-envelope-open");
+  button.classList.remove("fa-envelope");
 }
 
 function closeInvestmentMemoModal(){
   var modal = document.getElementById("investmentMemoModal");
   modal.style.display = 'none';
+  var button = document.getElementById("myBtn");
+  button.classList.remove("fa-envelope-open");
+  button.classList.add("fa-envelope");
 }

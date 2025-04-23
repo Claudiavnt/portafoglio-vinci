@@ -90,8 +90,7 @@
           if (p === correctPassword) {
             document.getElementById('login').style.display = 'none';
             document.getElementById('app').style.display = 'block';
-            var modal = document.getElementById("investmentMemoModal");
-            modal.style.display = 'block';
+            openInvestimentMemoModal();
           } else {
             showModal("Password errata. Riprova!");
             resetInputs();
@@ -163,8 +162,6 @@
   </div>
   <div class="align" id="memo">
     <div id="investmentMemoModal" class="investmentMemoModal">
-
-      <!-- Modal content -->
       <div class="modal-content">
         <span class="close" onclick="closeInvestmentMemoModal()">&times;</span>
         <p>Caro Vincenzo, <br> per la tua comunione abbiamo deciso di regalarti un investimento.</br>
