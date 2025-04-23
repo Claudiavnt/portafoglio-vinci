@@ -6,117 +6,176 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* all’inizio il div “app” è nascosto */
+    #app { display: none; }
+  </style>
 </head>
-<body class="align">
-  <div class="grid align__item">
-    <div class="register">
-      <img  class="site__logo" src="svg/login.svg" alt=""/>
-      <h2>Ciao!</h2>
-      <p>Inserisci il codice segreto per vedere i tuoi risparmi</p>
-      <form id="passwordForm">
-        <div class="form__field">
-          <input type="password" maxlength="1" id="input1" oninput="moveToNext(1)" onkeypress="return isNumberKey(event)" placeholder="___">
-          <input type="password" maxlength="1" id="input2" oninput="moveToNext(2)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
-          <input type="password" maxlength="1" id="input3" oninput="moveToNext(3)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
-          <input type="password" maxlength="1" id="input4" oninput="moveToNext(4)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
-        </div>
-        <div class="form__field">
-          <input type="button" onclick="checkPassword()" value="ENTRA">
-        </div>
-      </form>
-      <!-- Modale personalizzata -->
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-            <p id="modalMessage"></p>
-            <button class="close-btn" onclick="closeModal()">Chiudi</button>
-        </div>
-    </div>
+<body>
+  <div class="align" id="login">
+    <div class="grid align__item">
+      <div class="register">
+        <img  class="site__logo" src="svg/login.svg" alt=""/>
+        <h2>Ciao!</h2>
+        <p>Inserisci il codice segreto per vedere i tuoi risparmi</p>
+        <form id="passwordForm">
+          <div class="form__field">
+            <input type="password" maxlength="1" id="input1" oninput="moveToNext(1)" onkeypress="return isNumberKey(event)" placeholder="___">
+            <input type="password" maxlength="1" id="input2" oninput="moveToNext(2)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+            <input type="password" maxlength="1" id="input3" oninput="moveToNext(3)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+            <input type="password" maxlength="1" id="input4" oninput="moveToNext(4)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+          </div>
+          <div class="form__field">
+            <input type="button" onclick="checkPassword()" value="ENTRA">
+          </div>
+        </form>
+        <!-- Modale personalizzata -->
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+              <p id="modalMessage"></p>
+              <button class="close-btn" onclick="closeModal()">Chiudi</button>
+          </div>
+      </div>
 
-    <script>
-      const correctPassword = "0312";
+      <script>
+        const correctPassword = "0312";
 
-      // Abilita solo cifre
-      function isNumberKey(evt) {
-        const c = evt.which || evt.keyCode;
-        if (c < 48 || c > 57) {
-          evt.preventDefault();
-          return false;
-        }
-        return true;
-      }
-
-      // Sposta avanti automatico
-      function moveToNext(idx) {
-        const curr = document.getElementById('input'+idx);
-        if (curr.value.length === 1 && idx < 4) {
-          const next = document.getElementById('input'+(idx+1));
-          next.disabled = false;
-          next.focus();
-        }
-      }
-
-      // Gestione backspace “sequenziale”
-      function handleBackspace(evt, idx) {
-        if (evt.key === 'Backspace') {
-          const curr = document.getElementById('input'+idx);
-          // Se è già vuoto, torno indietro
-          if (curr.value === '') {
-            if (idx > 1) {
-              curr.disabled = true;            // disabilito il corrente
-              const prev = document.getElementById('input'+(idx-1));
-              prev.value = '';                  // svuoto il precedente
-              prev.disabled = false;            // riabilito il precedente
-              prev.focus();                     // ci vado col focus
-            }
-          } else {
-            // se non è vuoto, prima cancello il carattere
-            curr.value = '';
+        // Abilita solo cifre
+        function isNumberKey(evt) {
+          const c = evt.which || evt.keyCode;
+          if (c < 48 || c > 57) {
+            evt.preventDefault();
+            return false;
           }
-          evt.preventDefault();
+          return true;
         }
-      }
 
-      // Controlla la password e gestisce la modale
-      function checkPassword() {
-        const p = Array.from({length:4},(_,i)=>
-          document.getElementById('input'+(i+1)).value
-        ).join('');
-        if (p === correctPassword) {
-          window.location.href = "investimento.html";
-        } else {
-          showModal("Password errata. Riprova!");
+        // Sposta avanti automatico
+        function moveToNext(idx) {
+          const curr = document.getElementById('input'+idx);
+          if (curr.value.length === 1 && idx < 4) {
+            const next = document.getElementById('input'+(idx+1));
+            next.disabled = false;
+            next.focus();
+          }
+        }
+
+        // Gestione backspace “sequenziale”
+        function handleBackspace(evt, idx) {
+          if (evt.key === 'Backspace') {
+            const curr = document.getElementById('input'+idx);
+            // Se è già vuoto, torno indietro
+            if (curr.value === '') {
+              if (idx > 1) {
+                curr.disabled = true;            // disabilito il corrente
+                const prev = document.getElementById('input'+(idx-1));
+                prev.value = '';                  // svuoto il precedente
+                prev.disabled = false;            // riabilito il precedente
+                prev.focus();                     // ci vado col focus
+              }
+            } else {
+              // se non è vuoto, prima cancello il carattere
+              curr.value = '';
+            }
+            evt.preventDefault();
+          }
+        }
+
+        // Controlla la password e gestisce la modale
+        function checkPassword() {
+          const p = Array.from({length:4},(_,i)=>
+            document.getElementById('input'+(i+1)).value
+          ).join('');
+          if (p === correctPassword) {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            var modal = document.getElementById("investmentMemoModal");
+            modal.style.display = 'block';
+          } else {
+            showModal("Password errata. Riprova!");
+            resetInputs();
+          }
+        }
+
+        function resetInputs() {
+          for (let i = 1; i <= 4; i++) {
+            const el = document.getElementById('input'+i);
+            el.value = '';
+            el.disabled = (i !== 1);
+          }
+          document.getElementById('input1').focus();
+        }
+
+        function showModal(msg) {
+          document.getElementById('modalMessage').textContent = msg;
+          document.getElementById('myModal').style.display = 'flex';
+        }
+        function closeModal() {
+          document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Al caricamento, attacco gli handler dinamicamente
+        window.addEventListener('DOMContentLoaded', () => {
           resetInputs();
-        }
-      }
+          for (let i = 1; i <= 4; i++) {
+            const el = document.getElementById('input'+i);
+            el.addEventListener('keypress', isNumberKey);
+            el.addEventListener('input', () => moveToNext(i));
+            el.addEventListener('keydown', (e) => handleBackspace(e, i));
+          }
+        });
+      </script>
 
-      function resetInputs() {
-        for (let i = 1; i <= 4; i++) {
-          const el = document.getElementById('input'+i);
-          el.value = '';
-          el.disabled = (i !== 1);
-        }
-        document.getElementById('input1').focus();
-      }
+      </div>
+    </div>
+  </div>
+  <div class="align" id="app">
+    <script src="script.js"></script>
+    <div class="grid align__item">
+      <div class="register" style="padding: 0rem 0rem">
+          <div class="header_wrapper">
+          </div>
+          <div class="investimento_wrapper">
+              <div class="investimento_title">
+                  <h3>Ciao Vincenzo,</h3>
+                  <p class="investimento_description">Welcome back</p>
+              </div>
+              <div class="investimento_memo">
+                  <i class="fa fa-envelope" onclick="openInvestimentMemoModal()" aria-hidden="true" id="myBtn"></i><span style="font-size: 1rem; font-family: 'acme';"> (1)</span>
+              </div>
+          </div>
+        <div class="gift_wrapper">
+          <h2 id="portfolioValueDisplay">000,00€</h2>
+          <h3> -2,53% </h3>
+        </div>
+        <div class="quote-container">
+          <img class="quote_img" src="svg/login.svg" alt=""/>
+        </div>
+        <div class="detail_wrapper">
+          <h3 style="color: #142035; margin-left: 1rem;">Posizioni</h3>
+          <div class="">
 
-      function showModal(msg) {
-        document.getElementById('modalMessage').textContent = msg;
-        document.getElementById('myModal').style.display = 'flex';
-      }
-      function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
-      }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="align" id="memo">
+    <div id="investmentMemoModal" class="investmentMemoModal">
 
-      // Al caricamento, attacco gli handler dinamicamente
-      window.addEventListener('DOMContentLoaded', () => {
-        resetInputs();
-        for (let i = 1; i <= 4; i++) {
-          const el = document.getElementById('input'+i);
-          el.addEventListener('keypress', isNumberKey);
-          el.addEventListener('input', () => moveToNext(i));
-          el.addEventListener('keydown', (e) => handleBackspace(e, i));
-        }
-      });
-    </script>
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" onclick="closeInvestmentMemoModal()">&times;</span>
+        <p>Caro Vincenzo, <br> per la tua comunione abbiamo deciso di regalarti un investimento.</br>
+          Zio Loris, zia Claudia, nonna Titti, nonno Virginio e nonna Lina, insieme abbiamo raccolto 1,500€.</br>
+          Devi sapere che investire non è semplice. Richiede pazienza, conoscenza e un po’ di fortuna.
+          Come tutto nella vita di ciascuno di noi. Un giorno, quando sarai maggiorenne, potrai decidere di raccoglierne i frutti o continuare ad approfittare del compounding.
+          È una forza quasi magica, vedrai! Ricorda però che nessuna ricompensa è priva di rischi.
+          L'unico investimento da cui non avrai nulla da perdere è il tempo speso con i tuoi cari e quello dedicato alla tua crescita.
+          L'esperienza, quella purtroppo non si può comprare, e vale più di qualsiasi somma di denaro.</br>
+          Pertanto abbi cura di te, della tua famiglia e abbraccia la vita con il sorriso. </br> Ti vogliamo bene.</p>
+      </div>
 
     </div>
   </div>

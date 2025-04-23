@@ -238,6 +238,14 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   margin: 0;
 }
 
+.investimento_memo{
+  font-size: 1.5rem;
+  color: white;
+  margin-right: 1rem;
+  text-align: right;
+  position: relative;
+}
+
 
 .detail_wrapper{
   text-align: left;
@@ -254,4 +262,44 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   max-width: 600px;
   padding: 0 3rem;
   top: -2rem;
+}
+
+/* The Modal (background) */
+.investmentMemoModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.investmentMemoModal .modal-content {
+  background-color: #fefefe;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  position: relative;
+  top: 10%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

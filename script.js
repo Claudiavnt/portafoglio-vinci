@@ -43,3 +43,13 @@ async function fetchAllPortfolioValues() {
 }
 
 fetchAllPortfolioValues();
+
+function openInvestimentMemoModal() {
+  var modal = document.getElementById("investmentMemoModal");
+  modal.style.display = 'block';
+}
+
+function closeInvestmentMemoModal(){
+  var modal = document.getElementById("investmentMemoModal");
+  modal.style.display = 'none';
+}
