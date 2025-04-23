@@ -1,5 +1,7 @@
 const ISIN = ['IE00BF1B7389', 'IE00B44Z5B48'];
 const NUMBER_OF_TITLES = { 'IE00BF1B7389': 25, 'IE00B44Z5B48': 2 };
+const ISIN_NAME = { 'IE00BF1B7389': 'EACW', 'IE00B44Z5B48': 'ACWE' };
+const positions = [];
 
 async function fetchPortfolioValue(isin) {
   // Sostituisci l'URL originale con l'endpoint della funzione serverless
@@ -16,6 +18,12 @@ async function fetchPortfolioValue(isin) {
       const closingPrice = parseFloat(data['latestQuote']['raw']);
       const portfolioValue = closingPrice * NUMBER_OF_TITLES[isin];
       console.log(`Ticker ${isin} - Closing Price: ${closingPrice}, Portfolio Value: ${portfolioValue}`);
+      positions.push({
+        positionName: ISIN_NAME[isin],
+        closingPrice: closingPrice,
+        numberOfTitles: NUMBER_OF_TITLES[isin],
+        portfolioValue: portfolioValue
+      })
       return portfolioValue;
     } else {
       console.error(`Errore: Nessun dato trovato per isin ${isin}`, data);
@@ -37,9 +45,38 @@ async function fetchAllPortfolioValues() {
     portfolioValue = portfolioValue + value;
   })
   const totalPortfolioValue = portfolioValue + liquidita
+  positions.push({
+    positionName: 'Liquidità',
+    closingPrice: 0,
+    numberOfTitles: 0,
+    portfolioValue: liquidita
+  });
   console.log('Total Portfolio Value:', totalPortfolioValue);
 
   document.getElementById('portfolioValueDisplay').innerText = `+ ${totalPortfolioValue.toFixed(2)} €`;
+
+  const container = document.getElementById('positionsContainer');
+  positions.forEach(pos => {
+    // Creiamo un <div class="row position_row">
+    const row = document.createElement('div');
+    row.className = 'row position_row';
+
+    // Inseriamo il markup interno con template literal
+    row.innerHTML = `
+      <div class="position_icon col-3">
+        <i class="fa fa-money" aria-hidden="true" style="font-size: 2rem; color:#142035"></i>
+      </div>
+      <div class="position_name col-4">
+        <p style="color: #142035; margin-left: 2rem;">${pos.positionName}</p>
+      </div>
+      <div class="position_value col-4">
+        <p style="color: #142035; margin-left: 10rem;">€ ${pos.portfolioValue}</p>
+      </div>
+    `;
+
+    // Aggiungiamo la riga al container
+    container.appendChild(row);
+  });
 }
 
 fetchAllPortfolioValues();
