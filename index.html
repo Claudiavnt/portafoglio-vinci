@@ -140,8 +140,10 @@
                   <h3>Ciao Vincenzo,</h3>
                   <p class="investimento_description">Welcome back</p>
               </div>
-              <div class="investimento_memo">
-                  <i class="fa fa-envelope" onclick="openInvestimentMemoModal()" aria-hidden="true" id="myBtn"></i><span style="font-size: 1rem; font-family: 'acme';"> (1)</span>
+              <div class="investimento_memo" style="cursor: pointer;">
+                  <i class="fa fa-envelope" onclick="openInvestimentMemoModal()" aria-hidden="true" id="myBtn">
+                    <span style="font-size: 1rem; font-family: 'acme';"> (1)</span>
+                  </i>
               </div>
           </div>
         <div class="gift_wrapper">
@@ -153,18 +155,7 @@
         </div>
         <div class="detail_wrapper">
           <h3 style="color: #142035; margin-left: 1rem;">Posizioni</h3>
-          <div id="positionsContainer"></div>
-          <!--div class="row position_row">
-            <div class="position_icon col-3">
-              <i class="fa fa-money" aria-hidden="true" style="font-size: 2rem; color:#142035"></i>
-            </div>
-            <div class="position_name col-4">
-              <p style="color: #142035; margin-left: 2rem;">Azioni</p>
-            </div>
-            <div class="position_value col-4">
-              <p style="color: #142035; margin-left: 8rem;">portfolioValue</p>
-            </div>
-          </div-->
+          <div id="positionsContainer" style="padding: 0 1rem;"></div>
         </div>
       </div>
     </div>

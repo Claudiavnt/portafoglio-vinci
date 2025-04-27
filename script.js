@@ -22,7 +22,7 @@ async function fetchPortfolioValue(isin) {
         positionName: ISIN_NAME[isin],
         closingPrice: closingPrice,
         numberOfTitles: NUMBER_OF_TITLES[isin],
-        portfolioValue: portfolioValue
+        portfolioValue: portfolioValue.toFixed(2)
       })
       return portfolioValue;
     } else {
@@ -49,7 +49,7 @@ async function fetchAllPortfolioValues() {
     positionName: 'Liquidità',
     closingPrice: 0,
     numberOfTitles: 0,
-    portfolioValue: liquidita
+    portfolioValue: liquidita.toFixed(2)
   });
   console.log('Total Portfolio Value:', totalPortfolioValue);
 
@@ -63,14 +63,14 @@ async function fetchAllPortfolioValues() {
 
     // Inseriamo il markup interno con template literal
     row.innerHTML = `
-      <div class="position_icon col-3">
+      <div class="position_icon">
         <i class="fa fa-money" aria-hidden="true" style="font-size: 2rem; color:#142035"></i>
       </div>
-      <div class="position_name col-4">
+      <div class="position_name">
         <p style="color: #142035; margin-left: 2rem;">${pos.positionName}</p>
       </div>
-      <div class="position_value col-4">
-        <p style="color: #142035; margin-left: 10rem;">€ ${pos.portfolioValue}</p>
+      <div class="position_value">
+        <p style="color: #142035;">€ ${pos.portfolioValue}</p>
       </div>
     `;
 

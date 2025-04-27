@@ -304,8 +304,23 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   cursor: pointer;
 }
 
-.position_row{
-  padding: 0 1rem;
+.position_row {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.position_icon {
+  flex: 0 0 auto;
+}
+
+.position_name {
+  flex: 1 1 auto;
+  margin-left: -1.5rem;
+}
+
+.position_value {
+  flex: 1 1 auto;
+  text-align: right;
+  margin-right: 0.5rem;
 }
