@@ -308,19 +308,27 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   display: flex;
   align-items: center;
   gap: 1rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .position_icon {
   flex: 0 0 auto;
+  font-size: 1.5rem;
+  color:#142035
 }
 
 .position_name {
   flex: 1 1 auto;
-  margin-left: -1.5rem;
+  margin-left: -0.5rem;
+  color: #142035;
+  min-width: 12rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .position_value {
   flex: 1 1 auto;
   text-align: right;
-  margin-right: 0.5rem;
+  color: #142035;
 }

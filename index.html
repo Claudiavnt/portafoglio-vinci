@@ -21,10 +21,10 @@
         <p>Inserisci il codice segreto per vedere i tuoi risparmi</p>
         <form id="passwordForm">
           <div class="form__field">
-            <input type="password" type="tel" pattern="[0-9]*" maxlength="1" id="input1" oninput="moveToNext(1)" onkeypress="return isNumberKey(event)" placeholder="___">
-            <input type="password" type="tel" pattern="[0-9]*" maxlength="1" id="input2" oninput="moveToNext(2)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
-            <input type="password" type="tel" pattern="[0-9]*" maxlength="1" id="input3" oninput="moveToNext(3)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
-            <input type="password" type="tel" pattern="[0-9]*" maxlength="1" id="input4" oninput="moveToNext(4)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="input1" oninput="moveToNext(1)" onkeypress="return isNumberKey(event)" placeholder="___">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="input2" oninput="moveToNext(2)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="input3" oninput="moveToNext(3)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="input4" oninput="moveToNext(4)" onkeypress="return isNumberKey(event)" disabled placeholder="___">
           </div>
           <div class="form__field">
             <input type="button" onclick="checkPassword()" value="ENTRA">
@@ -148,10 +148,10 @@
           </div>
         <div class="gift_wrapper">
           <h2 id="portfolioValueDisplay">000,00€</h2>
-          <h3> -2,53% </h3>
+          <h3 id="PeLPercentage" style="letter-spacing: 0.1rem;"></h3>
         </div>
         <div class="quote-container">
-          <img class="quote_img" src="svg/login.svg" alt=""/>
+          <img class="quote_img" id="quote_img" src="svg/percentage_normal.svg" alt=""/>
         </div>
         <div class="detail_wrapper">
           <h3 style="color: #142035; margin-left: 1rem;">Posizioni</h3>

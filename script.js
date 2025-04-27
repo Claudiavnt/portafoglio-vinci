@@ -1,14 +1,10 @@
 const ISIN = ['IE00BF1B7389', 'IE00B44Z5B48'];
 const NUMBER_OF_TITLES = { 'IE00BF1B7389': 25, 'IE00B44Z5B48': 2 };
-const ISIN_NAME = { 'IE00BF1B7389': 'EACW', 'IE00B44Z5B48': 'ACWE' };
+const ISIN_NAME = { 'IE00BF1B7389': 'MSCI All Country World EUR Hedged', 'IE00B44Z5B48': 'MSCI All Country World' };
+const prezziMedi = { 'IE00BF1B7389': 20.645, 'IE00B44Z5B48': 221.65 };
 const positions = [];
 
 async function fetchPortfolioValue(isin) {
-  // Sostituisci l'URL originale con l'endpoint della funzione serverless
-  // Se stai testando in locale con netlify dev, l'URL potrebbe essere:
-  // const BASE_URL = "http://localhost:8888/.netlify/functions/etf?isin=" + isin;
-  // Altrimenti, dopo il deploy, avrai un URL simile a:
-  // https://tuo-progetto.netlify.app/.netlify/functions/etf?isin=IE00BF1B7389
   const BASE_URL = "https://jazzy-melba-944469.netlify.app/.netlify/functions/etf?isin=" + isin;
 
   try {
@@ -46,11 +42,12 @@ async function fetchAllPortfolioValues() {
   })
   const totalPortfolioValue = portfolioValue + liquidita
   positions.push({
-    positionName: 'Liquidità',
+    positionName: 'CASH',
     closingPrice: 0,
     numberOfTitles: 0,
     portfolioValue: liquidita.toFixed(2)
   });
+  fetchPeLPercentage(totalPortfolioValue.toFixed(2), liquidita.toFixed(2));
   console.log('Total Portfolio Value:', totalPortfolioValue);
 
   document.getElementById('portfolioValueDisplay').innerText = `+ ${totalPortfolioValue.toFixed(2)} €`;
@@ -64,19 +61,38 @@ async function fetchAllPortfolioValues() {
     // Inseriamo il markup interno con template literal
     row.innerHTML = `
       <div class="position_icon">
-        <i class="fa fa-money" aria-hidden="true" style="font-size: 2rem; color:#142035"></i>
+        <i class="fa fa-money" aria-hidden="true"></i>
       </div>
       <div class="position_name">
-        <p style="color: #142035; margin-left: 2rem;">${pos.positionName}</p>
+        <p>${pos.positionName}</p>
       </div>
       <div class="position_value">
-        <p style="color: #142035;">€ ${pos.portfolioValue}</p>
+        <p>€ ${pos.portfolioValue}</p>
       </div>
     `;
 
     // Aggiungiamo la riga al container
     container.appendChild(row);
   });
+}
+
+async function fetchPeLPercentage(totalPortfolioValue, liquidita){
+  // totalPortfolioValue / (((prezzoMedioEACW x NUMBER_OF_TITLES) + (prezzoMedioACWE x NUMBER_OF_TITLES) + liquidita)-1)*100
+  const prezzoMedioACWE = (prezziMedi['IE00BF1B7389'] * NUMBER_OF_TITLES['IE00BF1B7389']);
+  const prezzoMedioEACW = (prezziMedi['IE00B44Z5B48'] * NUMBER_OF_TITLES['IE00B44Z5B48']);
+  const prezzi = (prezzoMedioACWE + prezzoMedioEACW + parseInt(liquidita));
+  const percentage = ((totalPortfolioValue / prezzi)-1)*100;
+  document.getElementById('PeLPercentage').innerText = `${percentage.toFixed(1)} %`;
+
+  const imgEl  = document.getElementById('quote_img');
+
+  if (percentage < 0) {
+    imgEl.src = 'svg/percentage_normal.svg';
+    imgEl.alt = 'Andamento negativo';
+  } else {
+    imgEl.src = 'svg/percentage_plus.svg';
+    imgEl.alt = 'Andamento positivo';
+  }
 }
 
 fetchAllPortfolioValues();
