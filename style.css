@@ -37,7 +37,7 @@ body {
 }
 
 .site__logo {
-  margin-bottom: 2rem;
+  /**margin-bottom: 1.5rem;**/
 }
 
 input {
@@ -313,9 +313,12 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .position_icon {
+  display:flex;
   flex: 0 0 auto;
   font-size: 1.5rem;
-  color:#142035
+  color:#142035;
+  justify-content: center;
+  min-width: 2rem;
 }
 
 .position_name {
@@ -328,6 +331,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .position_value {
+  display: flex;
+  justify-content: right;
   flex: 1 1 auto;
   text-align: right;
   color: #142035;

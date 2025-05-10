@@ -1,7 +1,6 @@
 const ISIN = ['IE00BF1B7389', 'IE00B44Z5B48'];
 const NUMBER_OF_TITLES = { 'IE00BF1B7389': 25, 'IE00B44Z5B48': 2 };
 const ISIN_NAME = { 'IE00BF1B7389': 'MSCI All Country World EUR Hedged', 'IE00B44Z5B48': 'MSCI All Country World' };
-const prezziMedi = { 'IE00BF1B7389': 20.645, 'IE00B44Z5B48': 221.65 };
 const positions = [];
 
 async function fetchPortfolioValue(isin) {
@@ -18,7 +17,8 @@ async function fetchPortfolioValue(isin) {
         positionName: ISIN_NAME[isin],
         closingPrice: closingPrice,
         numberOfTitles: NUMBER_OF_TITLES[isin],
-        portfolioValue: portfolioValue.toFixed(2)
+        portfolioValue: portfolioValue.toFixed(2),
+        positionIcon: 'fa-line-chart'
       })
       return portfolioValue;
     } else {
@@ -45,9 +45,10 @@ async function fetchAllPortfolioValues() {
     positionName: 'CASH',
     closingPrice: 0,
     numberOfTitles: 0,
-    portfolioValue: liquidita.toFixed(2)
+    portfolioValue: liquidita.toFixed(2),
+    positionIcon: 'fa-eur'
   });
-  fetchPeLPercentage(totalPortfolioValue.toFixed(2), liquidita.toFixed(2));
+  fetchPeLPercentage(totalPortfolioValue.toFixed(2));
   console.log('Total Portfolio Value:', totalPortfolioValue);
 
   document.getElementById('portfolioValueDisplay').innerText = `+ ${totalPortfolioValue.toFixed(2)} €`;
@@ -61,7 +62,7 @@ async function fetchAllPortfolioValues() {
     // Inseriamo il markup interno con template literal
     row.innerHTML = `
       <div class="position_icon">
-        <i class="fa fa-money" aria-hidden="true"></i>
+        <i class="fa ${pos.positionIcon}" aria-hidden="true"></i>
       </div>
       <div class="position_name">
         <p>${pos.positionName}</p>
@@ -76,12 +77,9 @@ async function fetchAllPortfolioValues() {
   });
 }
 
-async function fetchPeLPercentage(totalPortfolioValue, liquidita){
-  // totalPortfolioValue / (((prezzoMedioEACW x NUMBER_OF_TITLES) + (prezzoMedioACWE x NUMBER_OF_TITLES) + liquidita)-1)*100
-  const prezzoMedioACWE = (prezziMedi['IE00BF1B7389'] * NUMBER_OF_TITLES['IE00BF1B7389']);
-  const prezzoMedioEACW = (prezziMedi['IE00B44Z5B48'] * NUMBER_OF_TITLES['IE00B44Z5B48']);
-  const prezzi = (prezzoMedioACWE + prezzoMedioEACW + parseInt(liquidita));
-  const percentage = ((totalPortfolioValue / prezzi)-1)*100;
+async function fetchPeLPercentage(totalPortfolioValue){
+  const investimentoIniziale = 1500;
+  const percentage = ((totalPortfolioValue / investimentoIniziale)-1)*100;
   document.getElementById('PeLPercentage').innerText = `${percentage.toFixed(1)} %`;
 
   const imgEl  = document.getElementById('quote_img');
