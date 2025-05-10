@@ -36,6 +36,13 @@ body {
   align-self: flex-end;
 }
 
+#login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .site__logo {
   /**margin-bottom: 1.5rem;**/
 }
