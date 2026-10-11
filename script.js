@@ -117,7 +117,11 @@ const memos = [
     title: "17.10.2025",
     subtitle: "Regalo per la cresima",
     text: `
-      <p>Inserisci qui il testo del secondo messaggio.</p>
+      <p>Ciao Vincenzo,<br>
+        Come ben sai ci teniamo molto al tuo investimento, pertanto gli zii hanno aggiunto altri 300€ al tuo fondo. Questo è il nostro regalo per la tua cresima.</p>
+        <p>Tieni a mente che non sono solo soldi ma è un metodo che porta con sé pazienza e disciplina. Entrambe sono qualità molto importanti per la crescita di un bambino che come te inizia ad affrontare le prime responsabilità.</p>
+        <p>Siamo felici di poterti accompagnare in momenti così importanti della tua vita. </p>
+        <p>Gli zii e la tua famiglia ti saranno sempre vicino per sostenerti.</p>
     `
   },
   {
