@@ -344,3 +344,65 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   text-align: right;
   color: #142035;
 }
+
+.memo-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.memo-item:hover {
+  background: #dbe1fc;
+  border-color: #142035;
+}
+
+.memo-icon {
+  flex: 0 0 28px;
+  width: 28px;
+  text-align: center;
+  font-size: 20px;
+  color: #142035;
+}
+
+.memo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+
+.memo-info strong,
+.memo-info small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.memo-info strong {
+  font-size: 15px;
+  color: #333;
+}
+
+.memo-info small {
+  font-size: 13px;
+  color: #777;
+}
+
+.memo-arrow {
+  flex: 0 0 24px;
+  width: 24px;
+  text-align: center;
+  font-size: 25px;
+  color: #999;
+}
