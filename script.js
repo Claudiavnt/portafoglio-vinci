@@ -101,6 +101,7 @@ function openInvestimentMemoModal() {
   var button = document.getElementById("myBtn");
   button.classList.add("fa-envelope-open");
   button.classList.remove("fa-envelope");
+  showMemo(0)
 }
 
 function closeInvestmentMemoModal(){
@@ -110,3 +111,57 @@ function closeInvestmentMemoModal(){
   button.classList.remove("fa-envelope-open");
   button.classList.add("fa-envelope");
 }
+
+const memos = [
+  {
+    title: "17.10.2025",
+    subtitle: "Regalo per la cresima",
+    text: `
+      <p>Inserisci qui il testo del secondo messaggio.</p>
+    `
+  },
+  {
+    title: "18.05.2025",
+    subtitle: "Regalo per la prima comunione",
+    text: `
+      <p>Caro Vincenzo,<br>
+      in occasione della tua prima comunione, abbiamo deciso di farti un regalo speciale: un investimento.</p>
+
+      <p>Zio Loris, zia Claudia, nonna Titti, nonno Virginio e nonna Lina, insieme, abbiamo raccolto 1.500 euro per te!</p>
+
+      <p>Un giorno, quando sarai maggiorenne, potrai scegliere se raccoglierne i frutti oppure continuare a far crescere questo tesoretto, approfittando dell’effetto compounding. È una forza quasi magica, vedrai!</p>
+
+      <p>Ricorda, però, che ogni investimento porta con sé dei rischi e delle volte si può sbagliare. Non temere, ma anzi impara dagli errori. Investire non è semplice ma richiede pazienza, conoscenza e una buona dose di fortuna.</p>
+
+      <p>L’unico investimento da cui non avrai mai nulla da perdere è il tempo trascorso con le persone che ami e quello speso in ciò che ti rende felice. Ciascuno di questi momenti sarà una ricchezza inestimabile.</p>
+
+      <p>Perciò, abbi cura di te, della tua famiglia e affronta sempre la vita con ottimismo.<br>
+      Ti vogliamo bene.</p>
+    `
+  }
+];
+
+function showMemo(index) {
+  const memo = memos[index];
+
+  if (!memo) {
+    return;
+  }
+
+  document.getElementById("memoHistory").style.display = "none";
+  document.getElementById("memoDetail").style.display = "block";
+  document.getElementById("memoBack").style.display = "block";
+
+  document.getElementById("memoText").innerHTML = `
+    <h3>${memo.subtitle}</h3>
+    <small>${memo.title}</small>
+    ${memo.text}
+  `;
+}
+
+function showMemoHistory() {
+  document.getElementById("memoDetail").style.display = "none";
+  document.getElementById("memoHistory").style.display = "block";
+  document.getElementById("memoBack").style.display = "none";
+}
+
