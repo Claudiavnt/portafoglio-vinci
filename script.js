@@ -109,6 +109,7 @@ function closeInvestmentMemoModal(){
   var button = document.getElementById("myBtn");
   button.classList.remove("fa-envelope-open");
   button.classList.add("fa-envelope");
+  showMemo(null)
 }
 
 const memos = [
@@ -144,6 +145,7 @@ function showMemo(index) {
   const memo = memos[index];
 
   if (!memo) {
+    showMemoHistory()
     return;
   }
 
