@@ -150,7 +150,7 @@
               </div>
               <div class="investimento_memo" style="cursor: pointer;">
                   <i class="fa fa-envelope" onclick="openInvestimentMemoModal()" aria-hidden="true" id="myBtn">
-                    <span style="font-size: 1rem; font-family: 'acme';"> (1)</span>
+                    <span style="font-size: 1rem; font-family: 'acme';"> (2)</span>
                   </i>
               </div>
           </div>
@@ -171,16 +171,47 @@
   <div class="align" id="memo">
     <div id="investmentMemoModal" class="investmentMemoModal">
       <div class="modal-content">
-        <span class="close" onclick="closeInvestmentMemoModal()">&times;</span>
-        <p>Caro Vincenzo,<br>in occasione della tua prima comunione, abbiamo deciso di farti un regalo speciale: un investimento.
-          <br>Zio Loris, zia Claudia, nonna Titti, nonno Virginio e nonna Lina, insieme, abbiamo raccolto 1.500 euro per te! <br>
-          Un giorno, quando sarai maggiorenne, potrai scegliere se raccoglierne i frutti oppure continuare a far crescere questo tesoretto, approfittando dell’effetto compounding. È una forza quasi magica, vedrai! <br>
-          Ricorda, però, che ogni investimento porta con sé dei rischi e delle volte si può sbagliare. Non temere, ma anzi impara dagli errori. Investire non è semplice ma richiede pazienza, conoscenza e una buona dose di fortuna.
-          L’unico investimento da cui non avrai mai nulla da perdere è il tempo trascorso con le persone che ami e quello speso in ciò che ti rende felice. Ciascuno di questi momenti sarà una ricchezza inestimabile. <br>
-          Perciò, abbi cura di te, della tua famiglia e affronta sempre la vita con ottimismo.<br>
-          Ti vogliamo bene.</p>
-      </div>
 
+        <div class="memo-header">
+          <span class="memo-back" id="memoBack" onclick="showMemoHistory()" style="display: none; float: left;">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Torna allo storico
+          </span>
+
+          <span class="close"
+                onclick="closeInvestmentMemoModal()">
+            &times;
+          </span>
+        </div>
+
+        <!-- Storico messaggi -->
+        <div id="memoHistory">
+          <h3>Storico dei messaggi</h3>
+
+          <div class="memo-item" onclick="showMemo(0)">
+            <span class="memo-icon"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></span>
+            <span class="memo-info">
+              <strong>17.10.2025</strong>
+              <small>Secondo messaggio</small>
+            </span>
+            <span class="memo-arrow">›</span>
+          </div>
+
+          <div class="memo-item" onclick="showMemo(1)">
+            <span class="memo-icon"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></span>
+            <span class="memo-info">
+              <strong>18.05.2025</strong>
+              <small>Regalo per la prima comunione</small>
+            </span>
+            <span class="memo-arrow">›</span>
+          </div>
+        </div>
+
+        <!-- Dettaglio del messaggio selezionato -->
+        <div id="memoDetail" style="display: none;">
+          <div id="memoText"></div>
+        </div>
+
+      </div>
     </div>
   </div>
 </body>
