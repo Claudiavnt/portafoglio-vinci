@@ -1,6 +1,6 @@
-const ISIN = ['IE00BF1B7389', 'IE00B44Z5B48'];
-const NUMBER_OF_TITLES = { 'IE00BF1B7389': 25, 'IE00B44Z5B48': 2 };
-const ISIN_NAME = { 'IE00BF1B7389': 'MSCI All Country World EUR Hedged', 'IE00B44Z5B48': 'MSCI All Country World' };
+const ISIN = ['IE00B441G979']; //'IE00B44Z5B48'
+const NUMBER_OF_TITLES = { 'IE00B441G979': 16}; // 'IE00B44Z5B48': 2
+const ISIN_NAME = { 'IE00B441G979': 'MSCI All Country World EUR Hedged' }; // 'IE00B44Z5B48': 'MSCI All Country World'
 const positions = [];
 
 async function fetchPortfolioValue(isin) {
@@ -36,7 +36,7 @@ async function fetchAllPortfolioValues() {
   const promises = ISIN.map(isin => fetchPortfolioValue(isin));
   const portfolioValues = await Promise.all(promises);
   let portfolioValue = 0;
-  const liquidita = 577.16;
+  const liquidita = 300;
   portfolioValues.forEach(value => {
     portfolioValue = portfolioValue + value;
   })
@@ -78,7 +78,7 @@ async function fetchAllPortfolioValues() {
 }
 
 async function fetchPeLPercentage(totalPortfolioValue){
-  const investimentoIniziale = 1500;
+  const investimentoIniziale = 1800;
   const percentage = ((totalPortfolioValue / investimentoIniziale)-1)*100;
   document.getElementById('PeLPercentage').innerText = `${percentage.toFixed(1)} %`;
 
