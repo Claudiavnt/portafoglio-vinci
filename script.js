@@ -36,7 +36,7 @@ async function fetchAllPortfolioValues() {
   const promises = ISIN.map(isin => fetchPortfolioValue(isin));
   const portfolioValues = await Promise.all(promises);
   let portfolioValue = 0;
-  const liquidita = 300;
+  const liquidita = 600;
   portfolioValues.forEach(value => {
     portfolioValue = portfolioValue + value;
   })
@@ -78,7 +78,7 @@ async function fetchAllPortfolioValues() {
 }
 
 async function fetchPeLPercentage(totalPortfolioValue){
-  const investimentoIniziale = 1800;
+  const investimentoIniziale = 2100;
   const percentage = ((totalPortfolioValue / investimentoIniziale)-1)*100;
   document.getElementById('PeLPercentage').innerText = `${percentage.toFixed(1)} %`;
 
@@ -118,10 +118,10 @@ const memos = [
     subtitle: "Regalo per la cresima",
     text: `
       <p>Ciao Vincenzo,<br>
-        Come ben sai ci teniamo molto al tuo investimento, pertanto gli zii hanno aggiunto altri 300€ al tuo fondo. Questo è il nostro regalo per la tua cresima.</p>
-        <p>Tieni a mente che non sono solo soldi ma è un metodo che porta con sé pazienza e disciplina. Entrambe sono qualità molto importanti per la crescita di un bambino che come te inizia ad affrontare le prime responsabilità.</p>
-        <p>Siamo felici di poterti accompagnare in momenti così importanti della tua vita. </p>
-        <p>Gli zii e la tua famiglia ti saranno sempre vicino per sostenerti.</p>
+      <p>Come ben sai ci teniamo molto al tuo investimento, pertanto gli zii, insieme ai nonni, hanno aggiunto altri 600€ al tuo fondo. Questo è il nostro regalo per la tua cresima. <br>
+      Tieni a mente che non sono solo soldi ma è un metodo che porta con sé pazienza e disciplina. Entrambe sono qualità molto importanti per la crescita di un bambino che come te inizia ad affrontare le prime responsabilità.
+      Siamo felici di poterti accompagnare in momenti così importanti della tua vita. <br>
+      Gli zii, i nonni e tutta la tua famiglia ti saranno sempre vicino per sostenerti.
     `
   },
   {
